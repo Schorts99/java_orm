@@ -1,6 +1,6 @@
 package app.controllers;
 
-import initializers.*;
+import config.initializers.*;
 
 public class ApplicationController {
   public static void main(String[] args) {

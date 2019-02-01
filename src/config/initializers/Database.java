@@ -1,4 +1,4 @@
-package initializers;
+package config.initializers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,7 +36,7 @@ public class Database {
 
   public static Database loadConfig() {
     try {
-      String config_file = new File("src/app/config/database.yml").getAbsolutePath();
+      String config_file = new File("src/config/database.yml").getAbsolutePath();
       Yaml yaml = new Yaml();
       InputStream file = Files.newInputStream(Paths.get(config_file));
       return yaml.loadAs(file, Database.class);
