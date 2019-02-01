@@ -1,4 +1,4 @@
-package app.controllers;
+package initializers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseController {
+public class Database {
   private final String enviroment = "development";
   private String driver = "com.mysql.jdbc.Driver";
   private String user;
@@ -21,14 +21,9 @@ public class DatabaseController {
   private String url;
   private Connection connection;
 
-  public static void main(String[] args) {
-    DatabaseController controller = loadConfig();
-    if(controller != null) {
-      controller.setUrl();
-      controller.connect();
-    } else {
-      System.err.println("Configuración invalida");
-    }
+  public void initialize() {
+    setUrl();
+    connect();
   }
 
   public void connect() {
@@ -39,12 +34,12 @@ public class DatabaseController {
     }
   }
 
-  public static DatabaseController loadConfig() {
+  public static Database loadConfig() {
     try {
       String config_file = new File("src/app/config/database.yml").getAbsolutePath();
       Yaml yaml = new Yaml();
       InputStream file = Files.newInputStream(Paths.get(config_file));
-      return yaml.loadAs(file, DatabaseController.class);
+      return yaml.loadAs(file, Database.class);
     } catch(Exception exception) {
       exception.printStackTrace();
     }
