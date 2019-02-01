@@ -1,0 +1,5 @@
+Compile with:
+  javac -d bin -cp src:src/libraries/* src/app/controllers/DatabaseController.java
+
+Run with:
+  java -cp bin:src/libraries/* app.controllers.DatabaseController
