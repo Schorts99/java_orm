@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class Database {
   private final String enviroment = "development";
-  private String driver = "com.mysql.jdbc.Driver";
   private String user;
   private String password;
   private String database;
@@ -20,6 +19,8 @@ public class Database {
   private String port;
   private String url;
   private Connection connection;
+
+  private Database() {}
 
   public void initialize() {
     setUrl();
@@ -32,6 +33,10 @@ public class Database {
     } catch(Exception exception) {
       exception.printStackTrace();
     }
+  }
+
+  public Connection getConnection() {
+    return connection;
   }
 
   public static Database loadConfig() {
@@ -59,7 +64,7 @@ public class Database {
   }
 
   public void setDatabase(Map<String, String> database) {
-    if(database != null && !database.equals("")) {
+    if(database != null) {
       this.database = database.get(enviroment);
     }
   }
@@ -67,6 +72,8 @@ public class Database {
   public void setHost(String host) {
     if(host != null && !host.equals("")) {
       this.host = host;
+    } else {
+      this.host = "0.0.0.0";
     }
   }
 
